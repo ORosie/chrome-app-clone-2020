@@ -5,7 +5,23 @@ const toDoForm = document.querySelector(".js-toDoForm"),
 
 const TODOS_LS = "toDos";
 
-const toDos = [];
+let toDos = [];
+
+
+
+function deleteToDo(event){
+    const btn = event.target;
+    const li = btn.parentNode;
+    toDoList.removeChild(li);
+    const cleanToDos = toDos. filter(function(todo){
+        return toDo.id !== pasrseInt(li.id);
+        //li.id 가 string이라서 숫자로 바꿔줘야함. toDo.id는 숫자.
+    });
+
+    toDos = cleanToDos
+    saveToDos();
+
+}
 
 function saveToDos() {
   localStorage.setItem(TODOS_LS, JSON.stringify(toDos));
@@ -18,6 +34,7 @@ function paintToDo(text) {
   const delBtn = document.createElement("button");
   delBtn.innerText = "❌";
   //이모티콘 넣는 단축키 cmd+control+spacebar
+  delBtn.addEventListener("click", deleteToDo);
   const span = document.createElement("span");
   const newId = toDos.length + 1;
   span.innerText = text;
